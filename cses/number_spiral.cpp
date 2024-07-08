@@ -47,3 +47,70 @@ It looks like triangle or pyramid.
 Any group : mid element is on diagonal. (1,1) = 1 , (2,2) = 3, (3,3) = 7, (4,4) = 13
 Left of mid is on row and right of the mid is on column.
 */
+#include <iostream>
+#include <algorithm>
+#include <vector>
+using namespace std;
+typedef long long ll;
+
+int main() {
+    int t;
+    cin >> t;
+    vector<ll> ans;
+    while (t--) {
+        ll Y, X;
+        cin >> Y >> X;
+        
+        if (Y > X) {
+            // Compute the area of the inner square
+            ll cur_ans = (Y - 1) * (Y - 1);
+            ll add = 0;
+
+            // Check parity of Y to determine if numbers are in
+            // increasing or decreasing order
+            if (Y % 2 != 0) {
+            // Add X to the area if Yth row is odd
+                add = X;
+            }
+            else {
+                // Add 2*Y - X to the area if Yth row is even
+                add = 2 * Y - X;
+            }
+            // Print the final result
+            ans.push_back(cur_ans + add);
+        }
+        // If X is greater than or equal to Y, implying Xth
+        // column is the outer boundary
+        else {
+
+            // Compute the area of the inner square
+            ll cur_ans = (X - 1) * (X - 1);
+            ll add = 0;
+
+            // Check parity of X to determine if numbers are in
+            // increasing or decreasing order
+            if (X % 2 == 0) {
+                // Add Y to the area if Xth column is even
+                add = Y;
+            }
+            else {
+                // Add 2*X - Y to the area if Xth column is odd
+                add = 2 * X - Y;
+            }
+            // Print the final result
+            ans.push_back(cur_ans + add);
+        }
+    }
+
+    for(int i=0; i<ans.size(); i++)
+        cout<<ans[i]<<" ";
+
+    cout<<endl;
+
+    return 0;
+}
+
+/*
+Retrospective: 
+Revisit it again. 
+*/
